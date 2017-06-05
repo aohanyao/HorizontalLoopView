@@ -18,7 +18,29 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
+            android:background="#f6f6f6"
             app:child_width="100dp"/>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="15sp"/>
+
+        <com.aohanyao.loop.widget.HorizontalLoopView
+            android:id="@+id/hlv2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
+            app:child_width="100dp"/>
+
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 

@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="each_payment_date_day">
-        <item>1日</item>
-        <item>2日</item>
-        <item>3日</item>
-        <item>4日</item>
-        <item>5日</item>
-        <item>6日</item>
-        <item>7日</item>
-        <item>8日</item>
-        <item>9日</item>
-        <item>10日</item>
-        <item>11日</item>
-        <item>12日</item>
-        <item>13日</item>
+    <array name="images_url">
+        <item>http://img0.178.com/hex/201502/217810468638/217810481694.jpg</item>
+        <item>http://img2.178.com/hex/201502/217810468638/217810481757.jpg</item>
+        <item>http://img4.178.com/hex/201502/217810468638/217810481663.jpg</item>
+        <item>http://img4.178.com/hex/201502/217810468638/217810481739.jpg</item>
+        <item>http://img4.178.com/hex/201502/217810468638/217810481613.jpg</item>
+        <item>http://img0.178.com/hex/201502/217810468638/217810481707.jpg</item>
+        <item>http://img5.178.com/hex/201502/217810468638/217810481682.jpg</item>
+        <item>http://img0.178.com/hex/201502/217810468638/217810481588.jpg</item>
+        <item>http://img2.178.com/hex/201502/217810468638/217810481601.jpg</item>
+        <item>http://img5.178.com/hex/201502/217810468638/217810481607.jpg</item>
+        <item>http://img1.178.com/hex/201502/217810468638/217810481620.jpg</item>
+        <item>http://img0.178.com/hex/201502/217810468638/217810481626.jpg</item>
+        <item>http://img1.178.com/hex/201502/217810468638/217810481638.jpg</item>
+        <item>http://img4.178.com/hex/201502/217810468638/217810481645.jpg</item>
+        <item>http://img2.178.com/hex/201502/217810468638/217810481751.jpg</item>
+        <item>http://img2.178.com/hex/201502/217810468638/217810481713.jpg</item>
+        <item>http://img1.178.com/hex/201502/217810468638/217810481700.jpg</item>
+        <item>http://img1.178.com/hex/201502/217810468638/217810481745.jpg</item>
     </array>
     <array name="months_chines">
         <item>一月</item>

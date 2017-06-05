@@ -20,10 +20,9 @@ import com.aohanyao.loop.widget.util.DensityUtils;
  * Created by 江俊超 on 2017/6/5 0005.
  * <p>版本:1.0.0</p>
  * <b>说明<b>水平的循环选择<br/>
- * <li></li>
+ * <li>外接方式，支持任意View</li>
  */
 public class HorizontalLoopView extends LinearLayout {
-    private final String TAG = "HorizontalLoopView";
     private int mChildWidth = 70;
     /**
      * 整个View的宽度
@@ -305,6 +304,7 @@ public class HorizontalLoopView extends LinearLayout {
         int start;
         int end;
         int incr;
+        //向右滑动
         if (steps < 0) {
             start = 0;
             end = getChildCount();
@@ -320,23 +320,30 @@ public class HorizontalLoopView extends LinearLayout {
             //获取tag中的数据
             int mNowIndex = (int) childAtView.getTag(INDEX_TAG);
             if (steps > 0) {
+                //已经是第0个
                 if (mNowIndex == 0) {
+                    //重置为item的总个数
                     mNowIndex = loopViewAdapter.getItemCount();
                 }
+                //自减
                 mNowIndex--;
             } else {
+                //当前下标已等于总item数
                 if (mNowIndex == loopViewAdapter.getItemCount() - 1) {
+                    //重置为负一  自加后为0
                     mNowIndex = -1;
                 }
                 mNowIndex++;
             }
 
+            //获取中间的view
             if (childAtView.isSelected()) {
                 mCenterView = childAtView;
             }
-
+            //设置tag
             childAtView.setTag(INDEX_TAG, mNowIndex);
 
+            //回调给前台 设置数据
             if (loopViewAdapter != null) {
                 loopViewAdapter.setData(childAtView, mNowIndex);
             }
@@ -345,26 +352,28 @@ public class HorizontalLoopView extends LinearLayout {
     }
 
 
-    /**
-     * finding whether to scroll or not
-     */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();
         final int x = (int) ev.getX();
         if (action == MotionEvent.ACTION_DOWN) {
             stateMode = CLICK_MODE;
+            //滚动动画未完成
             if (!mScroller.isFinished()) {
+                //停止当前滚动的动画
                 mScroller.abortAnimation();
             }
         }
 
+        //不在任何模式 直接跳过
         if (stateMode == NO_MODE)
             return super.onTouchEvent(ev);
+
 
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
+        //转交事件
         mVelocityTracker.addMovement(ev);
 
         switch (action) {
@@ -436,8 +445,7 @@ public class HorizontalLoopView extends LinearLayout {
 
 
     /**
-     * causes the underlying mScroller to do a fling action which will be recovered in the
-     * computeScroll method
+     * 恢复滚动
      *
      * @param velocityX
      */

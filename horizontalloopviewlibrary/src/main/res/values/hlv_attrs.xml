@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalLoopView">
+        <!--每个item的宽度-->
+        <attr name="child_width" format="dimension"/>
+    </declare-styleable>
+</resources>

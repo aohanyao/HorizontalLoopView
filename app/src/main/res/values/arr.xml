@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="each_payment_date_day">
+        <item>1日</item>
+        <item>2日</item>
+        <item>3日</item>
+        <item>4日</item>
+        <item>5日</item>
+        <item>6日</item>
+        <item>7日</item>
+        <item>8日</item>
+        <item>9日</item>
+        <item>10日</item>
+        <item>11日</item>
+        <item>12日</item>
+        <item>13日</item>
+    </array>
+    <array name="months_chines">
+        <item>一月</item>
+        <item>二月</item>
+        <item>三月</item>
+        <item>四月</item>
+        <item>五月</item>
+        <item>六月</item>
+        <item>七月</item>
+        <item>八月</item>
+        <item>九月</item>
+        <item>十月</item>
+        <item>十一月</item>
+        <item>十二月</item>
+    </array>
+</resources>

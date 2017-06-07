@@ -1,1 +1,1 @@
-include ':app', ':horizontalloopviewlibrary'
+include ':app', ':horizontal-loop-view'

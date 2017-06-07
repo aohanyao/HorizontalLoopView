@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HorizontalLoopView.iml" filepath="$PROJECT_DIR$/HorizontalLoopView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/horizontalloopviewlibrary/horizontalloopviewlibrary.iml" filepath="$PROJECT_DIR$/horizontalloopviewlibrary/horizontalloopviewlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/horizontal-loop-view/horizontal-loop-view.iml" filepath="$PROJECT_DIR$/horizontal-loop-view/horizontal-loop-view.iml" />
     </modules>
   </component>
 </project>

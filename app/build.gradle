@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':horizontalloopviewlibrary')
+    compile project(':horizontal-loop-view')
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:24.2.1'
 }

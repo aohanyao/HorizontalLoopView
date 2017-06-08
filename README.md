@@ -77,3 +77,15 @@
         });
 
 具体请直接看demo
+
+
+
+###求关注
+微信求关注
+
+![AndroidRookie](http://obh9jd33g.bkt.clouddn.com/qrcode_for_gh_bce1408a47fc_344.jpg)
+
+
+QQ群求加入  现在只有我一个人
+
+[【Android Rookie:372734598】](https://jq.qq.com/?_wv=1027&k=4AAEUk8)

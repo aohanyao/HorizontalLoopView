@@ -21,6 +21,7 @@ import com.aohanyao.loop.widget.util.DensityUtils;
  */
 public class HorizontalLoopView extends LinearLayout {
     private final String TAG = "HorizontalLoopView";
+    private boolean isLoop = true;
     private int mChildWidth = 70;
     /**
      * all child sum width

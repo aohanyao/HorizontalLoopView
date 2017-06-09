@@ -105,44 +105,6 @@ public class MainActivity extends Activity {
 
         final String[] mMonths = getResources().getStringArray(R.array.months_chines);
 
-        //LoopViewAdapter支持泛型，只要是view的子类即可
-        hlv1.setLoopViewAdapter(new LoopViewAdapter() {
-            @Override
-            protected int setCenterIndex() {
-                //你要默认居中的下标
-                return 0;
-            }
-
-            @Override
-            public int getChildWidth() {
-                //每个view的宽度 单位是px
-                return 0;
-            }
-
-            @Override
-            public int getItemCount() {
-                //数量
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, boolean isCenter) {
-                //根据下标返回相应的view ,  isCenter 为true，返回中间的view，可以做一些其他的样式
-                return null;
-            }
-
-            @Override
-            public void setData(View scrollView, int position) {
-                //根据下标 对对应的View 做相应的数据处理
-            }
-
-            @Override
-            public void onSelect(View selectView, int position) {
-                //当数据选中的时候回调
-            }
-        });
-
-
         hlv1.setLoopViewAdapter(new LoopViewAdapter<TextView>() {
             @Override
             protected int setCenterIndex() {

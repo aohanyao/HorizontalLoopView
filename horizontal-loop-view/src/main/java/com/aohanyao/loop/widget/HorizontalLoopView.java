@@ -21,7 +21,7 @@ import com.aohanyao.loop.widget.util.DensityUtils;
  */
 public class HorizontalLoopView extends LinearLayout {
     private final String TAG = "HorizontalLoopView";
-    private boolean isLoop = true;
+    private boolean isLoop = false;
     private int mChildWidth = 70;
     /**
      * all child sum width
@@ -241,6 +241,7 @@ public class HorizontalLoopView extends LinearLayout {
         int scrollX = getScrollX();
         //获得滚动差
         int scrollDiff = x - mLastScroll;
+
         //遍历所有的子view
         if (getChildCount() > 0) {
             scrollX += scrollDiff;
@@ -309,16 +310,31 @@ public class HorizontalLoopView extends LinearLayout {
             //向右滑动
             if (steps > 0) {
                 //当前为0了，赋值为最后一个
-                if (mNowIndex == 0) {
+                if (mNowIndex == 0 /*&& isLoop*/) {
+                    //赋值
                     mNowIndex = loopViewAdapter.getItemCount();
                 }
                 mNowIndex--;
+                //显示视图 循环 并且 当前下标 大于等于0  显示
+               /* if (isLoop && mNowIndex >= 0) {
+                    childAtView.setVisibility(VISIBLE);
+                }
+                if (!isLoop && mNowIndex < 0) {
+                    childAtView.setVisibility(INVISIBLE);
+                }*/
             } else {
                 //向左滑动 已经是最后一个 赋值为第一个
-                if (mNowIndex == loopViewAdapter.getItemCount() - 1) {
+                if (mNowIndex == loopViewAdapter.getItemCount() - 1/* && isLoop*/) {
                     mNowIndex = -1;
                 }
                 mNowIndex++;
+                //显示视图  循环 并且 下标小于等于总条数
+               /* if (isLoop && mNowIndex <= loopViewAdapter.getItemCount() - 1) {
+                    childAtView.setVisibility(VISIBLE);
+                }
+                if (!isLoop && mNowIndex > loopViewAdapter.getItemCount() - 1) {
+                    childAtView.setVisibility(INVISIBLE);
+                }*/
             }
 
             //保存选中的View
@@ -329,7 +345,7 @@ public class HorizontalLoopView extends LinearLayout {
             childAtView.setTag(INDEX_TAG, mNowIndex);
 
             //适配器不为空  回调数据
-            if (loopViewAdapter != null) {
+            if (loopViewAdapter != null && childAtView.getVisibility() == VISIBLE) {
                 loopViewAdapter.setData(childAtView, mNowIndex);
             }
 

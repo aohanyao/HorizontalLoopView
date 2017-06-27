@@ -137,7 +137,7 @@ public class HorizontalLoopView extends LinearLayout {
      */
     private void initView() {
         //获取屏幕的宽度
-        final int displayWidth = DensityUtils.getWindowMsg(getContext())[0];
+        final int displayWidth = DensityUtils.getWindowWidth(getContext());
         //计算View的个数
         int childCount = displayWidth / mChildWidth;
 
@@ -155,7 +155,9 @@ public class HorizontalLoopView extends LinearLayout {
         mDataIndex = loopViewAdapter.getCenterIndex();
         //添加子view
         for (int i = 0; i < childCount; i++) {
+            //获得当前下标的书
             View childView = loopViewAdapter.getView(i, i == mCenterIndex);
+            //设置选中
             childView.setSelected(i == mCenterIndex);
             //添加
             addView(childView);
@@ -172,26 +174,26 @@ public class HorizontalLoopView extends LinearLayout {
         loopViewAdapter.onSelect(mCenterView, mDataIndex);
 
         //右边  中间 5 6 7
-        for (int i = mCenterIndex + 1, j = mDataIndex + 1; i < childCount; i++, j++) {
-            if (j == loopViewAdapter.getItemCount()) {
-                j = 0;
+        for (int i = mCenterIndex + 1, position = mDataIndex + 1; i < childCount; i++, position++) {
+            if (position == loopViewAdapter.getItemCount()) {
+                position = 0;
             }
             View childAtView = getChildAt(i);
-            loopViewAdapter.setData(childAtView, j);
-            childAtView.setTag(INDEX_TAG, j);
+            loopViewAdapter.setData(childAtView, position);
+            childAtView.setTag(INDEX_TAG, position);
         }
 
         //左边
-        for (int i = mCenterIndex - 1, j = mDataIndex - 1; i >= 0; i--, j--) {
-            if (j < 0) {
+        for (int i = mCenterIndex - 1, position = mDataIndex - 1; i >= 0; i--, position--) {
+            if (position < 0) {
                 //回到最后一个
-                j = loopViewAdapter.getItemCount() - 1;
+                position = loopViewAdapter.getItemCount() - 1;
             }
             View childAtView = getChildAt(i);
-            loopViewAdapter.setData(childAtView, j);
-            childAtView.setTag(INDEX_TAG, j);
+            loopViewAdapter.setData(childAtView, position);
+            childAtView.setTag(INDEX_TAG, position);
         }
-        //为TextView设置数据end
+        //为View设置数据end
 
 
         //最后计算整个宽度

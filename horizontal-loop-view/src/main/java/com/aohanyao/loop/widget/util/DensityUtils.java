@@ -1,7 +1,6 @@
 package com.aohanyao.loop.widget.util;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
@@ -68,8 +67,6 @@ public class DensityUtils {
                 .getSystemService(Context.WINDOW_SERVICE);
         wh[0] = wm.getDefaultDisplay().getWidth();
         wh[1] = wm.getDefaultDisplay().getHeight();
-        Log.d("vivi", "屏幕宽 =" + wh[0]);
-        Log.d("vivi", "屏幕高 =" + wh[1]);
         return wh;
     }
 }

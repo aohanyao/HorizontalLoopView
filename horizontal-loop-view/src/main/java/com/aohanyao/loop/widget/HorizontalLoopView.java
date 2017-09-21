@@ -1,15 +1,12 @@
 package com.aohanyao.loop.widget;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
@@ -17,36 +14,37 @@ import com.aohanyao.loop.widget.adapter.LoopViewAdapter;
 import com.aohanyao.loop.widget.util.DensityUtils;
 
 /**
- * Created by 江俊超 on 2017/6/5 0005.
- * <p>版本:1.0.0</p>
- * <b>说明<b>水平的循环选择<br/>
- * <li>外接方式，支持任意View</li>
+ * Created by aohanyao on 2017/6/5 0005.
+ * <p>version:1.0.0</p>
+ * <p>* desHorizontal Loop View</p>
+ * <p>github:https://github.com/aohanyao</p>
  */
 public class HorizontalLoopView extends LinearLayout {
+    private final String TAG = "HorizontalLoopView";
     private int mChildWidth = 70;
     /**
-     * 整个View的宽度
+     * all child sum width
      */
     private int mChildrenSumWidth;
     /**
-     * 滚动偏移量
+     * scroll offset
      */
     private int mInitialOffset;
     /**
-     * X轴滚动的量
+     * X offset
      */
     private int mScrollX;
     /**
-     * 上一次滚动的量
+     * last scroll
      */
     private int mLastScroll;
     private Scroller mScroller;
     /**
-     * 最小滚动速度
+     * min scroll speed
      */
     private int mMinimumVelocity;
     /**
-     * 最大滚动速度
+     * max scroll speed
      */
     private int mMaximumVelocity;
     /**
@@ -93,7 +91,6 @@ public class HorizontalLoopView extends LinearLayout {
         super(context, attrs, defStyleAttr);
         this.setWillNotDraw(false);
         initScroll();
-        ///initAttr(context, attrs);
         mDataIndex = 0;
     }
 
@@ -109,19 +106,6 @@ public class HorizontalLoopView extends LinearLayout {
         this.loopViewAdapter = loopViewAdapter;
         this.mChildWidth = loopViewAdapter.getChildWidth();
         initView();
-    }
-
-    /**
-     * 初始化相关属性
-     *
-     * @param context 上下文
-     * @param attrs   属性
-     */
-    private void initAttr(Context context, AttributeSet attrs) {
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.HorizontalLoopView);
-        //每个item的宽度
-        mChildWidth = (int) array.getDimension(R.styleable.HorizontalLoopView_child_width, DensityUtils.dp2px(context, mChildWidth));
-        array.recycle();
     }
 
     /**
@@ -145,17 +129,14 @@ public class HorizontalLoopView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-//        initView();
     }
 
     /**
      * 开始初始化数据
      */
     private void initView() {
-        //获取屏幕分辨率
-        final Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         //获取屏幕的宽度
-        final int displayWidth = display.getWidth();
+        final int displayWidth = DensityUtils.getWindowMsg(getContext())[0];
         //计算View的个数
         int childCount = displayWidth / mChildWidth;
 
@@ -270,7 +251,7 @@ public class HorizontalLoopView extends LinearLayout {
                 //计算向右滚动了多少个
                 int stepsRight = (relativeScroll + (mChildWidth / 2)) / mChildWidth;
                 //移动view
-                moveElements(-stepsRight);
+                moveChildres(-stepsRight);
                 //计算的X轴滚动值
                 scrollX = ((relativeScroll - mChildWidth / 2) % mChildWidth) + mInitialOffset - mChildWidth / 2;
             } else if (mInitialOffset - scrollX > mChildWidth / 2) {//向前滑动
@@ -279,7 +260,7 @@ public class HorizontalLoopView extends LinearLayout {
                 //计算向左滚动了多少个
                 int stepsLeft = (relativeScroll + (mChildWidth / 2)) / mChildWidth;
                 //移动view
-                moveElements(stepsLeft);
+                moveChildres(stepsLeft);
                 //计算的X轴滚动值
                 scrollX = (mInitialOffset + mChildWidth / 2 - ((mInitialOffset + mChildWidth / 2 - scrollX) % mChildWidth));
             }
@@ -297,14 +278,19 @@ public class HorizontalLoopView extends LinearLayout {
         mLastScroll = x;
     }
 
-    protected void moveElements(int steps) {
+    /**
+     * 移动 元素的值
+     *
+     * @param steps
+     */
+    protected void moveChildres(int steps) {
+
         if (steps == 0 || loopViewAdapter == null) {
             return;
         }
         int start;
         int end;
         int incr;
-        //向右滑动
         if (steps < 0) {
             start = 0;
             end = getChildCount();
@@ -319,31 +305,29 @@ public class HorizontalLoopView extends LinearLayout {
             View childAtView = getChildAt(i);
             //获取tag中的数据
             int mNowIndex = (int) childAtView.getTag(INDEX_TAG);
+            //向右滑动
             if (steps > 0) {
-                //已经是第0个
+                //当前为0了，赋值为最后一个
                 if (mNowIndex == 0) {
-                    //重置为item的总个数
                     mNowIndex = loopViewAdapter.getItemCount();
                 }
-                //自减
                 mNowIndex--;
             } else {
-                //当前下标已等于总item数
+                //向左滑动 已经是最后一个 赋值为第一个
                 if (mNowIndex == loopViewAdapter.getItemCount() - 1) {
-                    //重置为负一  自加后为0
                     mNowIndex = -1;
                 }
                 mNowIndex++;
             }
 
-            //获取中间的view
+            //保存选中的View
             if (childAtView.isSelected()) {
                 mCenterView = childAtView;
             }
-            //设置tag
+            //保存当前的下标
             childAtView.setTag(INDEX_TAG, mNowIndex);
 
-            //回调给前台 设置数据
+            //适配器不为空  回调数据
             if (loopViewAdapter != null) {
                 loopViewAdapter.setData(childAtView, mNowIndex);
             }
@@ -352,28 +336,28 @@ public class HorizontalLoopView extends LinearLayout {
     }
 
 
+    /**
+     * finding whether to scroll or not
+     */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();
         final int x = (int) ev.getX();
+        //按下
         if (action == MotionEvent.ACTION_DOWN) {
             stateMode = CLICK_MODE;
-            //滚动动画未完成
+            //动画未完成 直接结束
             if (!mScroller.isFinished()) {
-                //停止当前滚动的动画
                 mScroller.abortAnimation();
             }
         }
 
-        //不在任何模式 直接跳过
         if (stateMode == NO_MODE)
             return super.onTouchEvent(ev);
-
 
         if (mVelocityTracker == null) {
             mVelocityTracker = VelocityTracker.obtain();
         }
-        //转交事件
         mVelocityTracker.addMovement(ev);
 
         switch (action) {
@@ -391,18 +375,27 @@ public class HorizontalLoopView extends LinearLayout {
                 reScrollTo(mScrollX, 0);
                 break;
             case MotionEvent.ACTION_UP:
+                //获得速度追踪器
                 final VelocityTracker velocityTracker = mVelocityTracker;
+                //调用滑动 300ms
                 velocityTracker.computeCurrentVelocity(300);
+                //获得初始速度
                 int initialVelocity = (int) Math.min(velocityTracker.getXVelocity(), mMaximumVelocity);
-
+                //当前的初始速度大于最小速度->滚动
                 if (getChildCount() > 0 && Math.abs(initialVelocity) > mMinimumVelocity) {
+                    //滚动
                     fling(-initialVelocity);
+                    //赋值当前模式为滑动模式
                     stateMode = FLING_MODE;
                 } else {
+                    //点击
                     if (stateMode == CLICK_MODE) {
+                        //处理点击
                         clickFunction(ev);
                     } else {
+                        //移动一格
                         stateMode = MOVE_CENTER_MODE;
+                        //选中位置
                         selectPosition(getChildCount() / 2);
                     }
                 }
@@ -432,20 +425,28 @@ public class HorizontalLoopView extends LinearLayout {
      * @param selectIndex 中间的位置
      */
     public void selectPosition(int selectIndex) {
+        //当前子view的个数
         int childCount = getChildCount();
+        //中间的位置
         final int centerIndex = (childCount / 2);
+        //中间的X轴坐标
         int centerX = getWidth() / 2;
+        //获取当前滑动的X坐标   每个子View的宽度*当前选择的下标 - 滚动的X + 半个View的宽度
         int posX = mChildWidth * selectIndex - getScrollX() + mChildWidth / 2;
+        //获取差别
         int diff = posX - centerX;
+        //计算移动了几个
         int count = Math.abs(selectIndex - centerIndex);
         count = (count == 0) ? 1 : count;
+        //滚动到相应的位置
         mScroller.startScroll(mScrollX, 0, diff, 0, 800 * count);
+        //重绘
         postInvalidate();
     }
 
 
     /**
-     * 恢复滚动
+     * 开始滑动，飞速滑动
      *
      * @param velocityX
      */

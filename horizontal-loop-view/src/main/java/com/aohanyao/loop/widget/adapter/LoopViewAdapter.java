@@ -18,7 +18,6 @@ public abstract class LoopViewAdapter<V extends View> {
         return setCenterIndex();
     }
 
-
     /**
      * 中心下标
      *
@@ -43,7 +42,7 @@ public abstract class LoopViewAdapter<V extends View> {
 
     /**
      * 获取视图
-     *
+     *<p>返回数据视图</p>
      * @param position 数据的位置
      * @param isCenter 是否是中间的位置  以返回不同的布局
      * @return
@@ -52,6 +51,7 @@ public abstract class LoopViewAdapter<V extends View> {
 
     /**
      * 正在滚动
+     * <p>请在这里设置数据</p>
      *
      * @param scrollView 正在滚动的视图
      * @param position   数据的位置

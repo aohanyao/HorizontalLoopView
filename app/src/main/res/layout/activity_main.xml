@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
-            android:background="#f6f6f6"
-            app:child_width="100dp"/>
+            android:background="#f6f6f6"/>
 
         <TextView
             android:id="@+id/tv1"
@@ -33,8 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="10dp"
-            android:background="#fff"
-            app:child_width="100dp"/>
+            android:background="#fff"/>
 
         <ImageView
             android:id="@+id/iv2"

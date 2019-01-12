@@ -35,6 +35,7 @@ public class HorizontalLoopView extends LinearLayout {
      * X offset
      */
     private int mScrollX;
+    private int mSelectionPosition=1;
     /**
      * last scroll
      */
@@ -150,7 +151,8 @@ public class HorizontalLoopView extends LinearLayout {
         //先清除所有的View
         removeAllViews();
         //获取居中的子view下标
-        int mCenterIndex = childCount / 2;
+        int mCenterIndex = mSelectionPosition;
+//        int mCenterIndex = childCount / 2;
 
         mDataIndex = loopViewAdapter.getCenterIndex();
         //添加子view
@@ -213,7 +215,8 @@ public class HorizontalLoopView extends LinearLayout {
         } else {//滚动完成
             if (stateMode == FLING_MODE) {
                 stateMode = MOVE_CENTER_MODE;
-                selectPosition(getChildCount() / 2);
+//                selectPosition(getChildCount() / 2);
+                selectPosition(mSelectionPosition);
             }
         }
     }
@@ -224,7 +227,8 @@ public class HorizontalLoopView extends LinearLayout {
             mScroller.abortAnimation();
         }
         reScrollTo(x, y);
-        selectPosition(getChildCount() / 2);
+//        selectPosition(/*getChildCount() / 2*/ 1);
+        selectPosition(mSelectionPosition);
     }
 
     @Override
@@ -415,7 +419,8 @@ public class HorizontalLoopView extends LinearLayout {
                         //移动一格
                         stateMode = MOVE_CENTER_MODE;
                         //选中位置
-                        selectPosition(getChildCount() / 2);
+//                        selectPosition(getChildCount() / 2);
+                        selectPosition(mSelectionPosition);
                     }
                 }
             case MotionEvent.ACTION_CANCEL:
@@ -447,9 +452,10 @@ public class HorizontalLoopView extends LinearLayout {
         //当前子view的个数
         int childCount = getChildCount();
         //中间的位置
-        final int centerIndex = (childCount / 2);
+        final int centerIndex = 1;
         //中间的X轴坐标
-        int centerX = getWidth() / 2;
+//        int centerX = getWidth() / 2;
+        int centerX = loopViewAdapter.getChildWidth();
         //获取当前滑动的X坐标   每个子View的宽度*当前选择的下标 - 滚动的X + 半个View的宽度
         int posX = mChildWidth * selectIndex - getScrollX() + mChildWidth / 2;
         //获取差别

@@ -43,12 +43,12 @@ public class MainActivity extends Activity {
         hlv2.setLoopViewAdapter(new LoopViewAdapter<View>() {
             @Override
             protected int setCenterIndex() {
-                return mImages.length / 2;
+                return 1;
             }
 
             @Override
             public int getChildWidth() {
-                return DensityUtils.dp2px(mActivity, 80f);
+                return DensityUtils.dp2px(mActivity, 180f);
             }
 
             @Override
@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 
                 if (isCenter) {
                     ImageView iv = (ImageView) view.findViewById(R.id.iv);
-                    int margin = DensityUtils.dp2px(mActivity, 2);
+                    int margin = DensityUtils.dp2px(mActivity, 4);
                     ViewGroup.MarginLayoutParams marginLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
                     marginLayoutParams.leftMargin = margin;
